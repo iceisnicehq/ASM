@@ -1,0 +1,6 @@
+CMP by .SVD.
+
+Fixing TP7 div bug (asmed.exe unpacked!):
+asmed.exe 
+0001C9C7: F7 90
+0001C9C8: F1 90
