@@ -1,0 +1,457 @@
+
+
+                   Welcome to BRIEF Version 3.1
+                   ----------------------------
+    
+Thank you for choosing BRIEF!   This READ.ME file contains important
+information about BRIEF 3.1.
+
+
+TABLE OF CONTENTS
+-----------------
+1. How to Get Help
+2. Installation
+3. Summary of New and Changed Features From BRIEF 3.0 to BRIEF 3.1
+4. Summary of Mouse Button Assignments for Macros That Use the Mouse
+5. Summary of New and Changed Features From BRIEF 2.11 to BRIEF 3.0
+6. Corrections to the Documentation
+
+
+1. HOW TO GET HELP
+------------------
+
+  If you have any problems, please read this file and the BRIEF
+  manuals first. If you still have a question and need assistance,
+  help is available from the following sources:
+
+  A. Type GO BORLAND on the CompuServe bulletin board system for
+     instant access to the Borland forums with their libraries of
+     technical information and answers to common questions. Also,
+     on BIX, type JOIN BORLAND and on GEnie type BORLAND.
+
+  B. Check with your local software dealer or users' group.
+
+  C. Borland's TECHFAX service. Call (800) 822-4269 for a FAX
+     catalog of entries.
+
+  D. Borland's DownLoad Bulletin Board (DLBBS) has sample macros
+     and technical information you can download with your modem.
+     Call (408) 439-9096. No special setup is required.
+
+  E. If you have an urgent problem that cannot wait and you have
+     sent in the license agreement that came with the package,
+     you may call the Borland Technical Support Department at
+     (800) 851-9199. This number is temporary and may change. If
+     this number is not in service you can call the general Borland
+     Technical Support number (408) 461-9144.  Please have the
+     following information ready before calling:
+
+     1) Product name and serial number on your original
+	distribution disk.  Please have your serial number ready
+	or we will be unable to process your call.
+
+     2) Product version number.
+
+     3) Computer brand, model, and the brands and model numbers of
+	any additional hardware.
+
+     4) Operating system and version number. (The version number
+	can be determined by typing VER at the DOS prompt.)
+
+     5) Contents of your AUTOEXEC.BAT file.
+
+     6) Contents of your CONFIG.SYS file.
+
+     7) Contents of your WIN.INI and SYSTEM.INI files, if applicable.
+
+
+2. INSTALLATION
+---------------
+For owners updating from a previous version of BRIEF to BRIEF 3.1.
+The addition of mouse support requires changes to the _init macro
+in your initials macro.  These changes are done automatically by
+SETUP; but you must allow SETUP to update your initials macro.  At
+the end of SETUP, when prompted to update your intials macro; either
+allow the update, or write the changes to another file and replace
+the _init macro in your old initials macro with the _init from the
+new initials macro.
+
+To begin the installation:
+
+	Insert the SETUP Disk into drive A or B,
+
+depending on your floppy drive configuration and disks purchased.
+Set this drive as the default (if it is not currently the default,
+type "a:" or "b:" at the prompt and then press <Enter>).
+
+	Type "setup"
+
+and     Press <Enter>.
+
+Follow the instructions.  For more detail and step-by-step
+installation, see the "Installing BRIEF" chapter in the User's Guide.
+
+
+3. SUMMARY OF NEW AND CHANGED FEATURES FROM BRIEF 3.0 TO BRIEF 3.1
+------------------------------------------------------------------
+
+Mouse Support
+
+    BRIEF supports 2- or 3-button Microsoft-compatible mice. Mouse
+    button assignments are similar to Windows 3.0 button assignments;
+    a complete list is available in Chapter 3, "Command Overview,"
+    in the BRIEF for DOS and OS/2 User's Guide.  The mouse is also
+    accessible from the macro language by using new macro language
+    functions.  Chapter 7, "Programming the Mouse," in the BRIEF for
+    DOS and OS/2 Macro Language Guide describes how to program the
+    mouse.  Mouse button assignments for the various macro packages
+    also are included in this document.
+
+    A sample mouse event handler is available in mouse.cb.  Examples
+    of using the mouse inside macros can be found in:
+
+      buffers.cb         dialog.cb           dlg_list.cb
+      dlg_menu.cb        dlg_mous.cb         errorfix.cb
+      help.cb            keys.cb             prompt.cb
+      pvcs.cb            search.cb           tlib.cb
+
+    Mouse support necessitated the addition of close and zoom buttons
+    and scroll bars.  If these controls are enabled and your macros
+    create windows, the controls will appear on the windows.  The
+    controls can be hidden using set_ctrl_state.  To use the controls
+    with the mouse your macro will require a mouse event handler. The
+    preceding list of macros contains mouse event handlers.  Also mouse.cb
+    is a sample event handler.  Please see Chapter 7, "Programming the
+    Mouse," in the BRIEF for DOS and OS/2 Macro Language Guide for
+    complete details.  Pushing and popping keyboards also affect the
+    current mouse event handler.
+
+Redo Command
+
+    A redo command is now available.  Redo allows you to redo
+    previously undone commands until you edit the buffer.  Redo
+    is assigned to <Ctrl+u>, which was previously assigned to
+    Scroll Buffer Up.  Scroll Buffer Up is now assigned to
+    <Ctrl+e>.
+
+EMS Support
+
+    If EMS memory is available, by default, BRIEF buffers files
+    and macros there.  EMS memory can be turned off by setting
+    the environment variable BEMS=0.
+
+Popup Menu Added
+
+    BRIEF supports a popup menu that is actuated using mouse 
+    button 2.  When actuated, the popup menu appears with its 
+    top left corner at the current mouse position.  During
+    SETUP, you can choose how you want to use mouse button 2 to
+    display the popup menu, as well as to perform other edits
+    such as cut, copy, and paste.  When SETUP displays the
+    "Default button 2 action" prompt, select from one of the
+    two options shown below.
+
+    "Popup menu" -- If you select this option, mouse button 2
+    is given the following assignments:
+
+     Button 2 click               Display popup menu 
+     Button 2 double click        Display popup menu 
+     <Ctrl> Button 2 click        Execute last menu choice
+     <Alt> Button 2 click         Display last menu 
+     <Shift> Button 2 click       Copy to scrap
+
+    "Quick edit" -- If you select this option, mouse button 2 
+    is given the following assignments:
+
+     Button 2 click               Copy to scrap 
+     Button 2 double click        Paste 
+     <Ctrl> Button 2 click        Cut 
+     <Shift> Button 2 click       Display popup menu 
+     <Shift+Ctrl> Button 2 click  Execute last menu choice
+     <Shift+Alt> Button 2 click   Display last menu
+
+    Besides using SETUP, you can also change the mouse button 2
+    assignment by setting a parameter for set_btn2_action.  This
+    parameter, which can be either QUICK_MENU or QUICK_EDIT, is
+    defined in win_ctrl.h.  If set_btn2_action is not called,
+    the default assignment for mouse button 2 is QUICK_EDIT.
+
+    The default popup menu that is displayed can be found in 
+    \brief\help\popup.mnu.  You can customize this menu to suit
+    your preferences.  Processing for the popup menu can be
+    found in \brief\help\popup.cb; it provides a multi-level 
+    menu structure similar to that of the Help menu.
+
+    Macro package support can be added to the menu by creating
+    a sub-menu that can be called from the popup menu.  To do
+    this, add a line that contains the following:
+
+     popup menu choice for sub-menu followed by a semi-colon 
+     "process_popup_menu"
+     sub-menu name (in quotes) 
+     filename of the sub-menu (in quotes) 
+     height, width, line and column values (optional)
+
+    For example, the line below adds a new popup menu choice, 
+    Display My Menu, that displays the sub-menu in my.mnu 
+    whenever it is selected.  New Menu, the name of the
+    sub-menu, appears at the top when the sub-menu is
+    displayed.
+
+       Display My Menu   ;process_popup_menu "New Menu" "my.mnu"
+
+Check Boxes, Radio Buttons, and Push Buttons Added
+
+    The Dialog Manager now supports check boxes, radio buttons,
+    and push buttons.  For a complete discussion of these
+    features, including the documentation formerly provided in
+    dialog.doc, see Chapter 4, "Using Special Features," in the
+    BRIEF DOS-OS/2 User's Guide.
+
+PWB Macro Included
+
+    As an alternative to restore.cb, BRIEF now provides a macro
+    called pwb.cb that supports the Microsoft Programmer's 
+    Workbench.  Restore.cb lets BRIEF save its state information
+    in the PWB state file called current.sts.  To use the PWB 
+    macro:
+
+    1. Set BFILE= to the drive and directory where current.sts 
+       resides.  PWB keeps current.sts either in the current
+       directory (if no INIT environment variable exists) or in 
+       the first drive and directory specified in the INIT 
+       variable.  For example, if INIT=c:\c600\init;d:\init, then 
+       set BFILE=c:\c600\init\current.sts.
+
+    2. Replace -mrestore in the BFLAGS variable with -mpwb.
+       BRIEF creates private sections in the state file, and
+       updates the [shared-] and [edit-] sections.
+                                 
+Longer Status Line Messages
+
+    Status line messages now can be 80 characters long.  Long 
+    messages overwrite the Line:/Col: display and stay on the 
+    screen for at least three seconds, until the Line:/Col: 
+    display needs to be updated, or the time changes.  File 
+    names and prompts displayed in the message area can also 
+    overwrite the Line:/Col: display.
+
+Compiler Support
+
+    Support for Borland C++ Version 2.0 has been added.
+
+    Support for the following compilers has been upgraded to
+    the latest versions:
+
+     Lahey Fortran, F77L, Version 4.10, F77L-EM/32, Version 4.00
+
+     Alsys ADA, Version 4.4.2
+
+    These upgrades required a change in the error handling macros.
+
+
+4. SUMMARY OF MOUSE BUTTON ASSIGNMENTS FOR MACROS THAT USE THE MOUSE
+--------------------------------------------------------------------
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Macro   <Key Assignment>         ³<Modifier> Button
+    Command                        ³             Region
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Buffers <Alt+b>                  ³
+   Delete the file                ³  <Ctrl>  Click 2
+   Edit the file                  ³          Dbl Click 1
+   Exit                           ³          Click 1
+				   ³             Outside list
+				   ³           Click 1
+				   ³             On close button
+				   ³
+   Select an entry                ³          1 Down, Up, Drag, Click
+   Write the file                 ³          Click 2
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Errorfix <Ctrl+p>                ³
+   Close the error file window    ³          Click 2
+				   ³           Click 1
+				   ³             Outside error file
+				   ³             window
+   Pick an error entry            ³          Click 1
+   Select an entry                ³          1 Down, Up, Drag
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Help <Alt+h>                     ³
+   Display key assignment         ³          Click 1
+				   ³             In help text window
+   Pick a topic                   ³          Click 1
+				   ³             In help menu
+   Previous screen or menu        ³          Click 2
+				   ³           Click 1
+				   ³             Outside window or menu
+                                   ³           Click 1
+                                   ³             On close button
+   Exit help                      ³  <Ctrl>  Click 2 
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Keys <F10>keys                   ³
+   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿       ³
+   ³In left window, default³       ³
+   ³menu handling plus:    ³       ³
+   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ       ³
+   Exit                           ³          Click 1 
+                                   ³             Outside both windows
+   Insert a new entry             ³          Click 2
+                                   ³           Click 1 
+                                   ³             In right window 
+   Select an entry                ³          Click 1
+   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿      ³
+   ³In right window, default³      ³
+   ³menu handling plus:     ³      ³ 
+   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ      ³
+   Delete an entry                ³  <Ctrl>  Click 2
+   Exit                           ³           Click 1 
+                                   ³             Outside both windows
+				   ³           Click 1
+                                   ³             On left close button
+   Insert a new entry             ³          Click 2   
+                                   ³
+   To change to either window     ³          Click
+                                   ³             In window
+                                   ³
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Menus                            ³
+   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿   ³
+   ³Default menu handling plus:³   ³
+   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ   ³
+   Exit the menu                  ³          Click 1
+                                   ³             On close button
+                                   ³           Click 1
+				   ³             Outside menu
+   Pick an entry                  ³          Click 1
+				   ³             In client area
+   Select an entry                ³          1 Down, Up, Drag
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Prompt <Alt+e>                   ³
+   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿      ³
+   ³When a list of files is ³      ³
+   ³displayed, default menu ³      ³
+   ³handling plus:          ³      ³
+   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ      ³   
+   Close the file list            ³          Click 2
+   Select and edit the file(s)    ³          Dbl Click 1   
+   Select a file for editing      ³          Click 1
+   Toggle all selections          ³  <Shift> Click 1     
+                                   ³
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Routines <Ctrl-g>                ³
+   Default menu handling          ³
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+
+5. SUMMARY OF NEW AND CHANGED FEATURES FROM BRIEF 2.11 TO BRIEF 3.0
+-------------------------------------------------------------------
+
+Keystroke macros now can be saved (<Alt+F8>) and restored (<Alt+F7>).
+
+Windows now can be zoomed to full screen (and back to original size)
+by pressing either <Alt+F2> or <Ctrl+z>.
+
+A macro language with C-like syntax has been added.  To translate
+macros from the original syntax, BRIEF contains the utility bc.exe. 
+Using the -i option lets you translate macros back to the original
+syntax from the BRIEF macro language syntax.
+
+A macro language debugger has been added.  It is a full-screen,
+source-level debugger that can debug programs written in either
+of the BRIEF macro languages.
+
+Smart indenting and template editing now is provided for Ada, FORTRAN,
+BASIC, Pascal, COBOL, and Modula-2.  C support still exists.
+
+The maximum number of lines allowed in a file now exceeds two billion.
+To support longer line numbers, integers in the macro language now are
+32 bits.
+
+Several new macro language functions have been added:
+inq_window_info, create_tiled_window, display_windows, &=, |=,
+inq_top_left, copy_keyboard, for, do, inq_keystroke_macro, and
+save_keystroke_macro.
+
+Parameters to other functions have been changed.  Control strings now
+can have up to 10 parameters, and each parameter can be a string or
+an integer.
+
+The restore macro now saves and restores tiled windows, as well as
+the other information it has always saved.
+
+Multiple files can be selected in file completion menus.
+
+File completion menus now are sorted into directories and files, and
+are listed alphabetically within the types.  BRIEF might not fully sort
+the file list for a very large directory (due to time constraints).
+
+The Next Error command now correctly locates errors in include files.
+
+
+6. CORRECTIONS TO THE DOCUMENTATION
+-----------------------------------
+
+BRIEF for DOS and OS/2 Macro Language Guide
+
+Descriptions of two new mouse functions, inq_mouse_action and
+set_mouse_action, were omitted from Chapter 8, "Macro Reference."
+Each is described below.
+
+inq_mouse_action:  Obtains the name of the current mouse handler.
+
+  Syntax:       inq_mouse_action ()
+
+  Parameters:   None.
+
+  Return value: The string name of the current mouse handler.
+
+  Description:  By calling this function before doing a keyboard_push,
+		you can obtain the name of the handler that was
+		current before your macro executed keyboard_push.
+		The string name of the handler can be stored in a
+		global variable, and then referenced in your mouse
+		event handler using execute_macro.
+
+
+set_mouse_action:  Declares a new mouse handler.
+
+  Syntax:       set_mouse_action (name)
+
+  Parameters:   name    A string containing the name of the mouse handler
+			to associate with the current keyboard.
+
+  Return value: Nothing.
+
+  Description:  This function associates your handler with a new
+		keyboard; when the keyboard is pushed, it becomes the
+		current mouse event handler.  Declare your special
+		mouse event handler by putting set_mouse_action after
+		the keyboard_push and assign_to_key calls in your
+		macro.  (If your macro uses the dialog manager,
+		declare your handler while processing DIALOG_INIT.)
+		When the new keyboard is popped, your handler is also
+		popped off the stack, and the mouse event handler
+		associated with the original keyboard becomes the
+		current handler.
+
+
+On page 119 in Chapter 8, "Macro Reference," add this paragraph to the
+description of assign_to_key:
+
+Different key ids that make assignments to the same key are treated
+differently.  For example: <Ctrl+H> and <^H> both appear to specify
+the <Control> key plus the <H> key.  But <Ctrl+H> maps to the
+<Control> key plus the <H> key and <^H> maps to the <Backspace> key
+because both have the same ASCII equivalent.
+
+
+BRIEF for DOS and OS/2 User's Guide
+
+On page 34 in Chapter 2, "A Tutorial," add the following:
+
+If you enabled copying of macro source during SETUP, the macro source
+for copyrite.cb is copied into \brief\macros.  If you did not copy
+the macro source, you can 1) use SETUP to install the macro source,
+2) copy the macro statements from this manual, or 3) use an uncompress
+utility to extract the compressed macro source from misc\source.arc
+on the Brief installation disk.
+
