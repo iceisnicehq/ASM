@@ -26,7 +26,7 @@
 fullscreen=false
 fulldouble=false
 fullresolution=original
-windowresolution=1600x900
+windowresolution=1024x512
 output=opengl
 autolock=true
 sensitivity=100
@@ -246,8 +246,15 @@ ipx=false
 [autoexec]
 # Lines in this section will be run at startup.
 # You can put your MOUNT lines here.
-mount c /home/manchot/tasm/tasm.execs
+mount e /home/manchot/ASM/tasm
+e:
+# set PATH=%PATH%;E:\home\manchot\tasm\tasm.execs\
+path Z:\;E:\
+mount c /home/manchot/ASM/code
 c:
-set PATH=Z:\;C:\home\manchot\tasm\tasm.execs;C:\home\manchot\tasm
-
-
+mount d /home/manchot/ASM/tasm
+PATH D:\WATCOM\BINW;%PATH%
+SET INCLUDE=D:\WATCOM\H
+SET WATCOM=D:\WATCOM
+SET EDPATH=D:\WATCOM\EDDAT
+SET WIPFC=D:\WATCOM\WIPFC
