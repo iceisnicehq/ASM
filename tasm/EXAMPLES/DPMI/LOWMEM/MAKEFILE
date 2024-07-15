@@ -1,0 +1,22 @@
+#----------------------------------------------------------------------------
+# DPMI examples - (C) Copyright 1994 by Borland International
+#----------------------------------------------------------------------------
+all: memdos.exe mem16.exe mem32.exe
+
+# The APIs
+lowmem16.obj: lowmem16.c
+	bcc -WX -c -ml $**
+
+lowmem32.obj: lowmem32.c
+	bcc32 -WX -Tt -w-asm -c $**
+
+
+# The example
+memdos.exe: memdemo.c
+	bcc -v -e$. $**
+
+mem16.exe: memdemo.c lowmem16.obj
+	bcc -WX -v -ml -e$. $**
+
+mem32.exe: memdemo.c lowmem32.obj
+	bcc32 -WX -v -e$. $**

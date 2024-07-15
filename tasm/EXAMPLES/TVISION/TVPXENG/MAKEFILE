@@ -1,0 +1,109 @@
+#
+#  Turbo Vision 2.0
+#
+#  TVENG Makefile
+#
+#  Defines:
+#
+#     DOS16   -  builds a 16 bit DPMI version
+#
+#     BCROOT  -  specifies the compilers root directory
+#                defaults to $(MAKEDIR)\..
+#
+#     TVDIR   -  specifies root directory where Turbo Vision
+#                was installed, defaults to BCROOT
+#
+#     PXDIR   -  specifies root directory where the Paradox
+#                Engine was installed.
+#
+
+.AUTODEPEND
+
+!if !$d(BCROOT)
+BCROOT = $(MAKEDIR)\..
+!endif
+
+!if !$d(TVDIR)
+TVDIR = $(BCROOT)
+!endif
+
+!if !$d(PXDIR)
+!error PXDIR must point to Paradox Engine directory
+!endif
+
+!if $d(DEBUG)
+CCDEBUG = -v -N
+LINKDEBUG = /v
+!endif
+
+CFGFILE   = TVPXENG.CFG
+CCFLAGS   = -ml $(CCDEBUG)
+CC        = BCC +$(CFGFILE)
+TLINK     = TLINK $(LINKDEBUG)
+STARTUP   = c0l.obj
+LIBS      = tv.lib pxengtcl.lib emu.lib mathl.lib noehl.lib cl.lib
+LINKFLAGS = /s
+
+!if $d(DOS16)
+CFGFILE   = TVPXEN.C16
+CCFLAGS   = -WX -ml $(CCDEBUG)
+CC        = BCC +$(CFGFILE)
+TLINK     = TLINK $(LINKDEBUG)
+STARTUP   = c0x.obj
+LIBS      = tv.lib pxengwin.lib dpmi16.lib emux.lib mathwl.lib noehwl.lib cwl.lib
+LINKFLAGS = /s /Tx
+DEFFILE   = tvpxeng.def
+!endif
+
+!if $d(DOS16)
+PXEINCLUDE= $(PXDIR)\WINDOWS
+PXELIB=$(PXDIR)\WINDOWS
+PXMSG=$(PXDIR)\WINDOWS\pxmsg.c
+!else
+PXEINCLUDE=$(PXDIR)\C\INCLUDE
+PXELIB= $(PXDIR)\C\LIB
+COMPAT=$(BCROOT)\LIB\COMPAT\SETJMP.OBJ
+PXMSG=$(PXDIR)\C\pxmsg.c
+!endif
+
+
+!if "$(BCROOT)"=="$(TVDIR)"
+LIBPATH     = $(BCROOT)\LIB;$(PXELIB)
+INCLUDEPATH = $(BCROOT)\INCLUDE;$(PXEINCLUDE)
+!else
+LIBPATH     = $(TVDIR)\LIB;$(BCROOT)\LIB;$(PXELIB)
+INCLUDEPATH = $(TVDIR)\INCLUDE;$(BCROOT)\INCLUDE;$(PXEINCLUDE)
+!endif
+
+#       *Implicit Rules*
+
+.cpp.obj:
+  $(CC) -c {$< }
+
+OBJS = tvpxeng.obj pxmsg.obj
+
+tvpxeng.exe: $(CFGFILE) $(OBJS)
+  $(TLINK) $(LINKFLAGS)/L$(LIBPATH) @&&|
+$(STARTUP)+
+$(OBJS)
+TVPXENG.EXE
+TVPXENG.MAP
+$(LIBS)
+$(DEFFILE)
+|
+
+tvpxeng.obj: tvpxeng.cpp $(CFGFILE)
+
+pxmsg.obj: $(PXMSG) $(CFGFILE)
+  $(CC) -c $(PXMSG)
+
+#                     *Compiler Configuration File*
+$(CFGFILE): makefile
+  copy &&|
+$(CCFLAGS) $(CCDEBUG)
+-w
+-x-
+-RT-
+-I$(INCLUDEPATH)
+-L$(LIBPATH)
+| $(CFGFILE)

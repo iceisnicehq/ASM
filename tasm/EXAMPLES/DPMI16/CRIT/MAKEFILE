@@ -1,0 +1,2 @@
+critdemo.exe: critdemo.c criterr.asm critdemo.def
+	bcc -WX -v -ml -Tt critdemo.c criterr.asm

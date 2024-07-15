@@ -1,0 +1,25 @@
+<Esc> for Menus - Selected QEdit Commands By Function - Press Any Key to Return
+               # = <Shift>     @ = <Alt>     ^ = <Ctrl>
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  Cursor Movement   ³      ³      Toggles       ³      ³ Block/Scrap Buffer ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ      ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ      ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+  GotoBlockBeg   ^QB          ToggleBoxDraw    #F1        MarkLine       @L
+  GotoBlockEnd   ^QK          ToggleBoxType    @F1        MarkColumn     @K
+  GotoLine       ^J           ToggleIndent     ^QI        DropAnchor     @A
+  PrevPosition   ^QP          ToggleSmartTabs  ^QT        Cut            grey -
+  ScreenLeft     @F5          ToggleTabsExpand @V         Copy           grey +
+  ScreenRight    @F6          ToggleTabsOut    @I         Paste          grey *
+  ScrollUp       ^W           ToggleWordwrap   ^OW        PasteOver      ^PrtSc
+  ScrollDown     ^Z           43/50 line mode  ^F1        UnmarkBlock    @U
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³        File        ³      ³       Editing      ³      ³       Other        ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ      ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ      ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+  ChangeFilename @O           AddLine          F2         CenterLine     ^OT
+  EditFile       @E           DelLine          @D         Upper          @1
+  Exit           ^KD          DelToEol         F6         Lower          @2
+  GlobalExit     @X           DelRtWord        ^T         Flip           @3
+  GlobalSave     @Y           DupLine          F4         Dos Shell      F9
+  NextFile       @N           JoinLine         @J         Sort           #F3
+  ReadBlock      @R           Literal          ^P         UndoCursorline ^QL
+  WriteBlock     @W           SplitLine        @S         WrapPara       @B
+  SaveFile       ^KS          UnKill           ^U         RepeatCmd      ^QQ

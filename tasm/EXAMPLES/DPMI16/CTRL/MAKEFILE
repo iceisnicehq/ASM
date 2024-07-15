@@ -1,0 +1,2 @@
+ctrldemo.exe: ctrldemo.c ctrl.asm ctrldemo.def
+	bcc -WX -v -ml -Tt ctrldemo.c ctrl.asm

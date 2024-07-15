@@ -1,0 +1,11 @@
+#----------------------------------------------------------------------------
+# DPMI examples - (C) Copyright 1994 by Borland International
+#----------------------------------------------------------------------------
+dosptr: dosptr.cpp
+	 bcc -ml $**
+
+dosptr16: dosptr.cpp
+	 bcc -WX -ml $**
+
+dosptr32: dosptr.cpp
+    bcc32 -WX $**
