@@ -1,16 +1,23 @@
-.MODEL SMALL
-.STACK
+%TITLE "Hello, World! in TASM"
 
-.DATA
-        Message DB "HELLO!", 13, 10, "$"
-.CODE
+.model small
+.stack 256
 
-START:
-        mov ax, @Data
+.data
+        strng     db      "Hello, World!", "$"
+
+.code
+Start:
+        mov ax, @data
         mov ds, ax
-        mov ah, 09h               
-        mov dx, OFFSET Message
+
+        mov dx, OFFSET strng
+        mov ah, 09h
         int 21h
-        mov ah, 4ch
+
+Exit:
+        mov ah, 04Ch
+        mov al, 0
         int 21h
-END START
+
+        END Start
